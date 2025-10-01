@@ -61,13 +61,14 @@ const fetchByField = async () => {
     query(collection($db, "pages"), where("url", "==", slug), limit(1))
   );
   if (!trySlug.empty)
-    return { id: trySlug.docs[0].id, ...trySlug.docs[0].data() };
+    return { id: trySlug.docs.at(0)!.id, ...trySlug.docs.at(0)!.data() };
 
   const path = "/" + slug;
   const tryTo = await getDocs(
     query(collection($db, "pages"), where("to", "==", path), limit(1))
   );
-  if (!tryTo.empty) return { id: tryTo.docs[0].id, ...tryTo.docs[0].data() };
+  if (!tryTo.empty)
+    return { id: tryTo.docs.at(0)!.id, ...tryTo.docs.at(0)!.data() };
 
   return null;
 };
@@ -76,7 +77,7 @@ const {
   data: page,
   pending,
   error,
-} = await useAsyncData(`${slug}`, async () => {
+} = await useAsyncData<any>(`${slug}`, async () => {
   return (
     (await fetchById()) ??
     (await fetchByField()) ??
