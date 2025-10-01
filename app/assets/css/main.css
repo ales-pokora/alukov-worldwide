@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme {
+  /* Colors */
+  --color-navbar-bg: #151515;
+  --color-sidebar-bg: #1d1d1d;
+  --color-sidebar-item-bg: #272727;
+  --color-sidebar-item-hover-bg: #414141;
+
+  /* Fonts */
+  --font-display: "Roboto", "sans-serif";
+}
