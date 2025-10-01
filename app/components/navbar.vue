@@ -69,7 +69,6 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const isOpen = ref(false);
 
-// Demo data – v reálné appce můžete posílat přes props nebo načítat z API
 const items = ref([
   {
     flag: "/images/de_100x150.gif",

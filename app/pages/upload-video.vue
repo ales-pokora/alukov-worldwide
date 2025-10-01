@@ -181,22 +181,20 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { useMainStore } from "~/stores/main"; // případně '~/stores/mainStore'
+import { useMainStore } from "~/stores/main";
 import { signOut } from "firebase/auth";
 
 definePageMeta({
-  middleware: ["auth-client"], // použije middleware/auth.client.ts
+  middleware: ["auth-client"],
 });
 
 const store = useMainStore();
 const { $auth } = useNuxtApp();
 
-// ---------- UI stav ----------
 const isSubmitting = ref(false);
 const errorMessage = ref<string | null>(null);
 const successMessage = ref<string | null>(null);
 
-// ---------- Form data ----------
 const form = ref({
   title: "",
   description: "",
@@ -205,7 +203,6 @@ const form = ref({
   url: "",
 });
 
-// Souborové inputy & náhledy
 const thumbFile = ref<File | null>(null);
 const videoFile = ref<File | null>(null);
 const thumbPreview = ref<string | null>(null);
@@ -214,7 +211,6 @@ const videoPreview = ref<string | null>(null);
 const thumbInput = ref<HTMLInputElement | null>(null);
 const videoInput = ref<HTMLInputElement | null>(null);
 
-// ---------- Helpers ----------
 const SLUG_REGEX = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 function slugify(input: string): string {
   return (input || "")
@@ -231,14 +227,12 @@ async function logout() {
     await signOut($auth);
     console.log("Uživatel byl odhlášen");
 
-    // například přesměrování zpět na login stránku
     return navigateTo("/login");
   } catch (err: any) {
     console.error("Chyba při odhlášení:", err.message);
   }
 }
 
-// auto-slug z titulku (pokud je slug prázdný nebo nevalidní)
 watch(
   () => form.value.title,
   (val) => {
@@ -248,7 +242,6 @@ watch(
   }
 );
 
-// ---------- File handlers ----------
 function onThumbChange(e: Event) {
   const file = (e.target as HTMLInputElement).files?.[0] || null;
   if (!file) return;
@@ -275,7 +268,6 @@ function onVideoChange(e: Event) {
   videoPreview.value = URL.createObjectURL(file);
 }
 
-// ---------- Submit ----------
 async function handleSubmit() {
   errorMessage.value = null;
   successMessage.value = null;
@@ -294,14 +286,12 @@ async function handleSubmit() {
 
     isSubmitting.value = true;
 
-    // Volání POUZE přes store.addPage
     await store.addPage({
       title: form.value.title,
       content: form.value.description,
       seoTitle: form.value.seoTitle,
       seoDescription: form.value.seoDescription,
       url: slug,
-      // volitelné soubory:
       thumbnailFile: thumbFile.value,
       videoFile: videoFile.value,
     });
@@ -315,7 +305,6 @@ async function handleSubmit() {
   }
 }
 
-// ---------- Reset ----------
 function resetForm() {
   form.value = {
     title: "",

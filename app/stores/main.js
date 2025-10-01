@@ -1,4 +1,3 @@
-// ~/stores/main.js
 import { defineStore } from "pinia";
 import { useNuxtApp } from "#app";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -38,20 +37,12 @@ export const useMainStore = defineStore("mainStore", {
   }),
 
   actions: {
-    /**
-     * Vytvoří stránku:
-     * - vezme data z objektu nebo FormData,
-     * - nahraje thumbnail/video do Storage (pokud jsou),
-     * - uloží metadata do Firestore,
-     * - přidá do lokálního stavu a vrátí záznam.
-     */
     async addPage(page) {
       const { $db, $storage } = useNuxtApp();
       if (!$db) throw new Error("Chybí Firestore instance ($db).");
       if (!$storage)
         throw new Error("Chybí Firebase Storage instance ($storage).");
 
-      // Normalizace vstupu
       const data =
         page instanceof FormData ? readFromFormData(page) : page || {};
 

@@ -57,7 +57,7 @@ async function login() {
       password.value
     );
     console.log("Přihlášený user:", res.user);
-    router.push("/upload-video"); // Přesměrování na domovskou stránku po přihlášení
+    router.push("/upload-video");
   } catch (err: any) {
     console.error("Chyba při přihlášení:", err.message);
   }

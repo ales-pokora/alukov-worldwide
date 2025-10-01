@@ -22,17 +22,6 @@
   </UApp>
 </template>
 
-<!-- <template>
-  <UApp>
-    <div class="flex flex-col min-h-screen font-display">
-      <Navbar />
-      <Sidebar />
-      <main class="bg-gray-100 flex-1 md:ml-74">
-        <NuxtPage />
-      </main>
-    </div>
-  </UApp>
-</template> -->
 <script setup>
 import Navbar from "./components/navbar.vue";
 import Sidebar from "./components/sidebar.vue";
