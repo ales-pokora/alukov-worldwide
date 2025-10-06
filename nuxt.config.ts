@@ -13,4 +13,10 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
   ],
   css: ["~/assets/css/main.css"],
+  nitro: {
+    firebase: {
+      gen: 2,
+    },
+    preset: "firebase",
+  },
 });
