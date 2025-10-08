@@ -10,7 +10,7 @@
         playsinline
         preload="metadata"
       >
-        Tvůj prohlížeč nepodporuje přehrávání videa.
+        Tvůj prohlížeč nepodporuje přehrávání videa
       </video>
     </div>
   </div>
