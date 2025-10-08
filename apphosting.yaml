@@ -1,19 +1,32 @@
+# apphosting.yaml
+
+# Nastavení Cloud Run instancí
 runConfig:
   cpu: 1
   memoryMiB: 1024
   concurrency: 80
+  # Pro pomalejší start můžeš dočasně odkomentovat:
+  # startupProbe:
+  #   timeoutSeconds: 240
 
+# Proměnné prostředí (POZOR: PORT sem nedávej, ten nastaví platforma)
 env:
   - variable: NODE_ENV
     value: production
-    availability: RUNTIME
+    availability:
+      - RUNTIME
+
   - variable: NITRO_HOST
     value: "0.0.0.0"
-    availability: RUNTIME
+    availability:
+      - RUNTIME
+
   - variable: NITRO_PORT
     value: "8080"
-    availability: RUNTIME
+    availability:
+      - RUNTIME
 
+# Přepiš build a run příkazy, ať máme plnou kontrolu
 scripts:
   buildCommand: npm ci && npm run build
   runCommand: node .output/server/index.mjs
