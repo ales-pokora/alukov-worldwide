@@ -20,6 +20,6 @@ export default defineNuxtConfig({
     firebase: {
       gen: 2,
     },
-    preset: "firebase",
+    preset: "node-server",
   },
 });
