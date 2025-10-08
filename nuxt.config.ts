@@ -15,6 +15,9 @@ export default defineNuxtConfig({
     "@nuxt/ui",
     "@pinia/nuxt",
   ],
+  icon: {
+    mode: "css",
+  },
   css: ["~/assets/css/main.css"],
   nitro: {
     firebase: {
