@@ -1,0 +1,19 @@
+runConfig:
+  cpu: 1
+  memoryMiB: 1024
+  concurrency: 80
+
+env:
+  - variable: NODE_ENV
+    value: production
+    availability: RUNTIME
+  - variable: NITRO_HOST
+    value: "0.0.0.0"
+    availability: RUNTIME
+  - variable: NITRO_PORT
+    value: "8080"
+    availability: RUNTIME
+
+scripts:
+  buildCommand: npm ci && npm run build
+  runCommand: node .output/server/index.mjs
