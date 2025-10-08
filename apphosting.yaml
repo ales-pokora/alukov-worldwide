@@ -28,5 +28,5 @@ env:
 
 # Přepiš build a run příkazy, ať máme plnou kontrolu
 scripts:
-  buildCommand: npm ci && npm run build
+  buildCommand: yarn install --frozen-lockfile && yarn build
   runCommand: node .output/server/index.mjs
